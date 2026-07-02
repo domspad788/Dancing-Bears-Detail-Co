@@ -1,0 +1,9 @@
+*.bak
+footer-scene-hires.png
+optimize_inline_images.py
+fix_remaining_images.py
+image-manifest.json
+_variant-a.html
+_variant-b.html
+_variant-c.html
+media/sunset-footer*
