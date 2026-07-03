@@ -67,6 +67,13 @@
   --ease:cubic-bezier(.22,.61,.36,1);
   --ease-out:cubic-bezier(.23,1,.32,1);
   --ease-in-out:cubic-bezier(.77,0,.175,1);
+  /* menu-board materials */
+  --wood:#7A4A2B; --wood-deep:#502F1B; --wood-light:#9C6740;
+  --leather:#5C2620; --leather-deep:#3A1712; --leather-light:#7A3A2E;
+  --metal:#8FA0AA; --metal-deep:#5E717B; --metal-light:#C3D2D8;
+  --board-card:#CC9A4A; --board-card-deep:#9C7126; --board-card-light:#E4C079;
+  --enamel:#F7F0DD; --enamel-deep:#D8C594;
+  --chalk:#242321; --chalk-deep:#121110;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;position:relative}
@@ -323,20 +330,133 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 .grid-4{display:grid;grid-template-columns:1fr;gap:20px}
 @media(min-width:640px){.grid-4{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1024px){.grid-4{grid-template-columns:repeat(4,1fr)}}
-.svc{position:relative;display:flex;flex-direction:column;min-height:250px;padding:28px 28px 32px;overflow:hidden;
-  transition:transform .22s var(--ease-out),box-shadow .22s var(--ease-out)}
-.svc:hover{transform:translate(-2px,-3px);box-shadow:8px 9px 0 0 var(--ink),0 22px 38px -22px rgba(42,27,18,.5)}
-.svc .num{position:absolute;top:20px;right:24px;font-family:"Bevan",serif;font-size:1.5rem;color:rgba(42,27,18,.15)}
 .icirc{width:56px;height:56px;border-radius:999px;display:grid;place-items:center;border:2.5px solid var(--ink);box-shadow:4px 4px 0 0 var(--ink);margin-bottom:20px}
 .icirc svg{width:28px;height:28px;color:#fff;stroke-width:2}
-.svc h3{font-size:1.3rem;font-weight:800;margin:0 0 10px;color:var(--ink)}
-.svc p{color:rgba(42,27,18,.7);font-size:.95rem;margin:0}
-.svc .bar{position:absolute;left:0;bottom:0;height:6px;width:100%}
-.svc:hover .icirc{animation:wiggle 3s ease-in-out infinite}
-.svc-cta{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-height:250px;padding:28px;
-  border-radius:18px;border:3px solid var(--ink);box-shadow:6px 6px 0 0 var(--ink);background:var(--sky);color:#fff}
-.svc-cta h3{font-family:"Bevan",serif;text-transform:uppercase;font-size:1.6rem;line-height:1.02;margin:0 0 10px;-webkit-text-stroke:1.5px var(--ink);paint-order:stroke fill}
-.svc-cta p{color:rgba(255,255,255,.95);font-size:.95rem;font-weight:500;margin:0 0 20px}
+
+/* ============ FULL MENU — handcrafted vintage service board ============ */
+#services{position:relative;overflow:hidden;background:
+  radial-gradient(135% 105% at 12% -12%,rgba(217,164,65,.13),transparent 55%),
+  radial-gradient(120% 95% at 106% 22%,rgba(193,85,44,.10),transparent 55%),
+  radial-gradient(135% 105% at 62% 122%,rgba(75,107,68,.09),transparent 55%),
+  var(--cream)}
+#services::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.42;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='sg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23sg)' opacity='0.55'/%3E%3C/svg%3E");background-size:150px 150px}
+#services .sec-inner{position:relative;z-index:2}
+
+.svc-board{display:grid;grid-template-columns:1fr;gap:26px;align-items:start}
+@media(min-width:640px){.svc-board{grid-template-columns:repeat(2,1fr);gap:30px 26px}}
+@media(min-width:1024px){.svc-board{grid-template-columns:repeat(3,1fr);gap:40px 28px}
+  .svc-board>.svc:nth-child(2){margin-top:28px}
+  .svc-board>.svc:nth-child(3){margin-top:12px}
+  .svc-board>.svc:nth-child(4){margin-top:-4px}
+  .svc-board>.svc:nth-child(5){margin-top:22px}
+  .svc-board>.svc:nth-child(6){margin-top:8px}}
+
+.svc{position:relative;min-height:252px;border:3px solid var(--ink);border-radius:15px;isolation:isolate;
+  transform:rotate(var(--tilt,0deg));box-shadow:6px 7px 0 0 var(--ink),0 20px 34px -22px rgba(42,27,18,.5);
+  transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .3s var(--ease-out)}
+.svc:hover{transform:rotate(calc(var(--tilt,0deg)*.28)) translateY(-8px) scale(1.016);
+  box-shadow:11px 13px 0 0 var(--ink),0 32px 48px -22px rgba(42,27,18,.55)}
+.svc::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:12px;opacity:.4;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='cg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cg)' opacity='0.6'/%3E%3C/svg%3E");background-size:130px 130px}
+.svc-in{position:relative;z-index:2;display:flex;flex-direction:column;height:100%;padding:28px 24px 30px}
+.svc h3{font-family:"Bevan",serif;font-size:1.3rem;line-height:1.06;margin:0 0 9px;letter-spacing:.01em}
+.svc p{font-size:.93rem;line-height:1.5;margin:0}
+
+.svc-tag{position:absolute;top:-13px;left:20px;z-index:5;font-family:"Bevan",serif;font-size:.86rem;line-height:1;
+  padding:7px 11px 6px;background:#F4ECD6;color:var(--ink);border:2.5px solid var(--ink);border-radius:8px;
+  box-shadow:3px 3px 0 0 var(--ink);transform:rotate(-5deg)}
+.svc-tag::before{content:"NO. ";font-size:.6rem;letter-spacing:.08em;opacity:.68}
+
+.svc-emblem{width:74px;height:74px;display:grid;place-items:center;margin-bottom:18px;color:var(--flame);
+  background:radial-gradient(circle at 34% 26%,#FBF5E6,#E7D8B2);border:2.5px solid var(--ink);border-radius:16px;
+  box-shadow:4px 4px 0 0 var(--ink);transform:rotate(-3deg)}
+.svc-emblem svg{width:46px;height:46px;overflow:visible}
+.svc:hover .svc-emblem{animation:wiggle 2.6s ease-in-out infinite}
+
+.svc--enamel{background:radial-gradient(120% 80% at 25% 12%,rgba(255,255,255,.5),transparent 45%),linear-gradient(158deg,#F9F3E2,#E8DAB6);color:var(--ink)}
+.svc--enamel .svc-emblem{color:var(--flame)}
+.svc--metal{background:repeating-linear-gradient(125deg,rgba(255,255,255,.07) 0 2px,transparent 2px 7px),linear-gradient(158deg,#C6D4DA,#8FA0AA);color:var(--ink)}
+.svc--metal .svc-emblem{color:var(--sky-deep)}
+.svc--cardboard{background:repeating-linear-gradient(0deg,rgba(92,54,20,.06) 0 4px,transparent 4px 11px),linear-gradient(158deg,#DBAF5F,#BB8B36);color:var(--ink)}
+.svc--cardboard .svc-emblem{color:var(--forest)}
+.svc--wood{background:radial-gradient(circle at 80% 24%,rgba(0,0,0,.22),transparent 9%),repeating-linear-gradient(90deg,rgba(0,0,0,.07) 0 3px,transparent 3px 10px),linear-gradient(158deg,#7A4A2B,#4E2E1A);color:var(--paper)}
+.svc--wood .svc-emblem{color:var(--sun)}
+.svc--leather{background:radial-gradient(130% 80% at 18% 12%,rgba(255,255,255,.08),transparent 40%),radial-gradient(100% 120% at 82% 92%,rgba(0,0,0,.3),transparent 55%),linear-gradient(158deg,#6A2C24,#3A1712);color:var(--paper)}
+.svc--leather .svc-emblem{color:var(--sun-light)}
+.svc--forest{background:repeating-linear-gradient(90deg,rgba(0,0,0,.06) 0 3px,transparent 3px 10px),linear-gradient(158deg,#557A4C,#33502F);color:var(--paper)}
+.svc--forest .svc-emblem{color:var(--sun-light)}
+.svc--wood h3,.svc--leather h3,.svc--forest h3{color:#FBF5E6}
+.svc--wood p,.svc--leather p,.svc--forest p{color:rgba(247,240,221,.84)}
+.svc--enamel p,.svc--metal p,.svc--cardboard p{color:rgba(42,27,18,.74)}
+
+.svc-cta{grid-column:1/-1;position:relative;overflow:hidden;margin-top:16px;
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;
+  padding:34px 40px;border:3px solid var(--ink);border-radius:16px;color:var(--paper);
+  background:repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 3px,transparent 3px 11px),linear-gradient(160deg,#557A4C,#2F4A2B);
+  box-shadow:8px 9px 0 0 var(--ink),0 26px 46px -24px rgba(42,27,18,.6)}
+.svc-cta .cta-sun{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.22;
+  background:repeating-conic-gradient(from 0deg at 20% 46%,var(--sun-light) 0deg 6deg,transparent 6deg 13deg)}
+.cta-bolt{position:absolute;width:11px;height:11px;border-radius:50%;background:#F4ECD6;border:2px solid var(--ink);z-index:4}
+.cta-bolt.tl{top:12px;left:12px}.cta-bolt.tr{top:12px;right:12px}.cta-bolt.bl{bottom:12px;left:12px}.cta-bolt.br{bottom:12px;right:12px}
+.cta-copy{position:relative;z-index:2;flex:1 1 340px;min-width:260px}
+.cta-kicker{display:inline-block;font-family:"Permanent Marker",cursive;font-size:.95rem;color:var(--sun-light);margin-bottom:6px}
+.svc-cta h3{font-family:"Bevan",serif;text-transform:uppercase;font-size:clamp(1.5rem,3.4vw,2.15rem);line-height:.98;margin:0 0 8px;color:#FBF5E6;-webkit-text-stroke:1.6px var(--ink);paint-order:stroke fill}
+.svc-cta p{color:rgba(247,240,221,.9);font-size:.97rem;font-weight:500;margin:0}
+.cta-btn{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;background:var(--sun);color:var(--ink);
+  border:2.5px solid var(--ink);border-radius:11px;padding:15px 24px;font-family:"Bevan",serif;font-size:1.02rem;
+  box-shadow:4px 4px 0 0 var(--ink);cursor:pointer;white-space:nowrap;
+  transition:transform .2s var(--ease-out),box-shadow .2s var(--ease-out)}
+.cta-btn:hover{transform:translate(-2px,-3px);box-shadow:7px 7px 0 0 var(--ink)}
+
+/* ============ VINTAGE POSTER BACKGROUNDS — per-section, subtle (brand colors only) ============ */
+/* Base color + section-specific pattern (contours / tie-dye / board / halftone) at 3–14%.
+   Site-wide film grain is already supplied by the fixed .paper-grain overlay. */
+
+/* TRUST — warm aged poster paper */
+.trust{background:
+  radial-gradient(120% 90% at 15% 0%,rgba(217,164,65,.10),transparent 55%),
+  radial-gradient(110% 80% at 92% 42%,rgba(193,85,44,.06),transparent 55%),
+  var(--cream)}
+
+/* PRICING — hand-painted cream board (plank seams + warm wash) */
+.pricing{background:
+  repeating-linear-gradient(90deg,rgba(42,27,18,.045) 0 1px,transparent 1px 132px),
+  repeating-linear-gradient(90deg,rgba(255,255,255,.16) 1px,transparent 2px 132px),
+  radial-gradient(130% 100% at 20% -10%,rgba(217,164,65,.10),transparent 55%),
+  radial-gradient(120% 90% at 85% 112%,rgba(75,107,68,.07),transparent 55%),
+  var(--cream)}
+
+/* PROCESS & CONTACT backgrounds are set on their original rules further down
+   (they appear later in the stylesheet, so they must be overridden in place). */
+
+/* GALLERY — subtle psychedelic contours drifting over the sky */
+#results{position:relative}
+#results::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cfilter id='pg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.008 0.011' numOctaves='2' seed='9'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.42 0 0 0 0 0.31 0 0 0 0 0.48 0 0 0 1 0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 1 0 0 0 0 1 0 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23pg)'/%3E%3C/svg%3E");
+  background-size:540px 540px;animation:posterDrift 140s linear infinite}
+#results .sec-inner{position:relative;z-index:2}
+
+/* REVIEWS — faded vintage printed-paper halftone over the sky/video */
+#reviews::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.05;
+  background-image:radial-gradient(rgba(240,228,199,.9) 1px,transparent 1.6px);background-size:7px 7px}
+
+/* HERO — strongest: flowing contour + faded tie-dye + warm lighting beneath the logo */
+.hero .hero-wrap{position:relative;z-index:2}
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(60% 42% at 50% 6%,rgba(232,190,107,.20),transparent 60%),
+    radial-gradient(55% 46% at 15% 30%,rgba(107,78,122,.13),transparent 62%),
+    radial-gradient(50% 46% at 86% 24%,rgba(193,85,44,.11),transparent 62%),
+    radial-gradient(60% 56% at 74% 90%,rgba(75,107,68,.09),transparent 62%);
+  animation:heroBreath 15s ease-in-out infinite}
+.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.10;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='ph'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007 0.01' numOctaves='2' seed='4'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.36 0 0 0 0 0.51 0 0 0 0 0.65 0 0 0 1 0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 1 0 0 0 0 1 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ph)'/%3E%3C/svg%3E");
+  background-size:620px 620px;animation:posterDrift 170s linear infinite}
+
+@keyframes posterDrift{to{background-position:540px 0}}
+@keyframes heroBreath{0%,100%{opacity:.82}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){#results::before,.hero::after,.hero::before{animation:none}}
 .why{background:var(--forest-deep);position:relative}
 .why .why-card{padding:24px 24px 32px}
 .why .why-card h3{font-size:1.1rem;font-weight:800;margin:0 0 8px;color:var(--ink)}
@@ -411,7 +531,10 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 .gal-more button:active{transform:translate(2px,2px);box-shadow:2px 2px 0 0 var(--ink)}
 
 /* ---------- process ---------- */
-.process{background:var(--cream);position:relative}
+.process{background:
+    radial-gradient(rgba(42,27,18,.05) 1px,transparent 1.5px) 0 0/8px 8px,
+    radial-gradient(120% 90% at 80% 0%,rgba(90,111,160,.06),transparent 55%),
+    var(--cream);position:relative}
 .proc-wrap{position:relative;margin-top:56px}
 .proc-road{display:none;position:absolute;left:8%;right:8%;top:35px;height:4px;
   background:repeating-linear-gradient(90deg,var(--ink) 0 26px,transparent 26px 48px)}
@@ -466,7 +589,12 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 .marquee .grp .dot{font-size:1rem;padding-right:20px}
 
 /* ---------- contact ---------- */
-.contact{background:var(--cream)}
+.contact{background:
+    radial-gradient(55% 45% at 18% 22%,rgba(107,78,122,.12),transparent 62%),
+    radial-gradient(50% 42% at 82% 18%,rgba(193,85,44,.09),transparent 62%),
+    radial-gradient(58% 52% at 72% 84%,rgba(75,107,68,.08),transparent 62%),
+    radial-gradient(50% 48% at 26% 82%,rgba(90,111,160,.09),transparent 62%),
+    var(--cream)}
 .contact-grid{display:grid;gap:40px}
 @media(min-width:1024px){.contact-grid{grid-template-columns:.9fr 1.1fr;gap:64px}}
 .contact h2{margin:16px 0 20px}
@@ -755,7 +883,7 @@ footer.site{background:var(--forest-deep)}
 </section>
 
 <!-- SERVICES -->
-<section class="section cloud-top" id="services" style="background:var(--cream)">
+<section class="section cloud-top" id="services">
   <div class="container sec-inner">
     <div class="head-row">
       <div class="reveal">
@@ -764,12 +892,12 @@ footer.site{background:var(--forest-deep)}
       </div>
       <p class="lead reveal">Every package is tailored to your ride — from a deep interior refresh to multi-stage correction and long-haul protection.</p>
     </div>
-    <div class="grid-3" id="svcGrid"></div>
+    <div class="svc-board" id="svcGrid"></div>
   </div>
 </section>
 
 <!-- STARTING PRICES -->
-<section class="section pricing" id="pricing" style="background:var(--cream)">
+<section class="section pricing" id="pricing">
   <svg class="sparkle float-slow" style="right:8%;top:12%;width:22px;height:22px" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 L14.2 9.8 L24 12 L14.2 14.2 L12 24 L9.8 14.2 L0 12 L9.8 9.8 Z" fill="#E8BE6B" stroke="#2A1B12" stroke-width="1"/></svg>
   <div class="container sec-inner">
     <div style="text-align:center;max-width:680px;margin:0 auto 48px">
@@ -1038,13 +1166,24 @@ const TRUST = [
 ];
 const ACCENTS = ["#5C82A6","#C1552C","#4B6B44","#A13D2B","#D9A441"];
 const SERVICES = [
-  {num:"01", title:"Interior Detailing", desc:"Vacuuming, surface wipe-down, glass, and a full interior refresh that makes your cabin feel new again.", icon:"armchair"},
-  {num:"02", title:"Exterior Detailing", desc:"Hand wash, wheel cleaning, tire shine, and exterior protection for a clean, sharp finish.", icon:"car"},
-  {num:"03", title:"Full Details", desc:"Inside and out in one visit — our most complete clean for vehicles that need the works.", icon:"sparkles"},
-  {num:"04", title:"Mobile Service", desc:"We come to you — at home or at work, anywhere in the Capital Region. No drop-off, no waiting room.", icon:"map-pin"},
-  {num:"05", title:"Fleet Vehicles", desc:"Keep your work trucks and company cars clean and presentable with detailing built for fleets.", icon:"truck"},
-  {num:"06", title:"Maintenance Details", desc:"Recurring cleanups on a schedule that works for you, so your vehicle always looks its best.", icon:"refresh-cw"},
+  {num:"01", title:"Interior Detailing", desc:"Vacuuming, surface wipe-down, glass, and a full interior refresh that makes your cabin feel new again.", illus:"vacuum"},
+  {num:"02", title:"Exterior Detailing", desc:"Hand wash, wheel cleaning, tire shine, and exterior protection for a clean, sharp finish.", illus:"bucket"},
+  {num:"03", title:"Full Details", desc:"Inside and out in one visit — our most complete clean for vehicles that need the works.", illus:"shine"},
+  {num:"04", title:"Mobile Service", desc:"We come to you — at home or at work, anywhere in the Capital Region. No drop-off, no waiting room.", illus:"bus"},
+  {num:"05", title:"Fleet Vehicles", desc:"Keep your work trucks and company cars clean and presentable with detailing built for fleets.", illus:"truck"},
+  {num:"06", title:"Maintenance Details", desc:"Recurring cleanups on a schedule that works for you, so your vehicle always looks its best.", illus:"calendar"},
 ];
+// hand-drawn vintage service-board materials, tilts & illustrations
+const SVC_MATS = ["enamel","metal","wood","leather","cardboard","forest"];
+const SVC_TILT = [-1.5,1.1,-0.7,1.5,-1.2,0.7];
+const SVC_ILLUS = {
+  vacuum:`<svg viewBox="0 0 48 48" fill="none" stroke="#2A1B12" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="27" width="26" height="13" rx="6" fill="currentColor"/><circle cx="12" cy="42" r="2.6" fill="#F0E4C7"/><circle cx="24" cy="42" r="2.6" fill="#F0E4C7"/><path d="M31 31c9 0 8-11 3-15-3-2-3-5 0-7"/><path d="M34 9l4-1M34 9l1 4"/><line x1="10" y1="32" x2="17" y2="32"/></svg>`,
+  bucket:`<svg viewBox="0 0 48 48" fill="none" stroke="#2A1B12" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21h24l-3 18c-6 2-12 2-18 0z" fill="currentColor"/><path d="M13 21c3-3.5 19-3.5 22 0"/><path d="M16 18c1.5-5 14-5 16 0"/><circle cx="18" cy="11" r="2.2"/><circle cx="26" cy="8" r="2.8"/><circle cx="33" cy="12" r="1.9"/></svg>`,
+  shine:`<svg viewBox="0 0 48 48" fill="none" stroke="#2A1B12" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="24" width="24" height="13" rx="4" fill="currentColor"/><path d="M7 30c4 3 20 3 24 0"/><circle cx="13" cy="18" r="2.8"/><circle cx="20" cy="14" r="3.4"/><circle cx="27" cy="18" r="2.4"/><path d="M39 25l1.5 4.2 4.2 1.5-4.2 1.5-1.5 4.2-1.5-4.2-4.2-1.5 4.2-1.5z"/></svg>`,
+  bus:`<svg viewBox="0 0 48 48" fill="none" stroke="#2A1B12" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 31V21c0-3 2-4 4-4h24c5 0 7 6 8 10v4z" fill="currentColor"/><line x1="4" y1="31" x2="44" y2="31"/><circle cx="14" cy="33" r="3.6" fill="#F0E4C7"/><circle cx="34" cy="33" r="3.6" fill="#F0E4C7"/><rect x="9" y="21" width="8" height="6" rx="1" fill="#F0E4C7"/><circle cx="30" cy="23" r="4" fill="#F0E4C7"/><path d="M30 19v8M30 23l-2.8 2.8M30 23l2.8 2.8"/></svg>`,
+  truck:`<svg viewBox="0 0 48 48" fill="none" stroke="#2A1B12" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 31V20c0-2 1-3 3-3h17v6h8l4 5h4v3z" fill="currentColor"/><line x1="4" y1="31" x2="44" y2="31"/><circle cx="13" cy="33" r="3.6" fill="#F0E4C7"/><circle cx="35" cy="33" r="3.6" fill="#F0E4C7"/><rect x="8" y="20" width="8" height="6" rx="1" fill="#F0E4C7"/><path d="M26 24h6"/></svg>`,
+  calendar:`<svg viewBox="0 0 48 48" fill="none" stroke="#2A1B12" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="13" width="32" height="27" rx="3" fill="currentColor"/><line x1="8" y1="21" x2="40" y2="21"/><line x1="16" y1="10" x2="16" y2="16"/><line x1="32" y1="10" x2="32" y2="16"/><path d="M17 31l4.5 4.5L31 26" stroke="#F0E4C7"/></svg>`,
+};
 const WHY = [
   {title:"Attention to Detail", desc:"Every inch matters. We work the spots most shops skip — and it shows.", icon:"search-check", color:"#5C82A6"},
   {title:"Premium Products", desc:"Professional-grade products and proven techniques on every vehicle.", icon:"award", color:"#C1552C"},
@@ -1128,18 +1267,24 @@ function render(){
 
   // services
   document.getElementById("svcGrid").innerHTML = SERVICES.map((s,i)=>{
-    const a=ACCENTS[i%ACCENTS.length];
-    return `<article class="svc paper-card reveal" style="transition-delay:${(i%3)*70}ms">
-      <span class="num">${s.num}</span>
-      <div class="icirc" style="background:${a}">${ICON(s.icon)}</div>
-      <h3>${esc(s.title)}</h3><p>${esc(s.desc)}</p>
-      <span class="bar" style="background:${a}"></span>
+    const mat=SVC_MATS[i%SVC_MATS.length], tilt=SVC_TILT[i%SVC_TILT.length];
+    return `<article class="svc svc--${mat}" style="--tilt:${tilt}deg">
+      <span class="svc-tag">${esc(s.num)}</span>
+      <div class="svc-in reveal" style="transition-delay:${(i%3)*80}ms">
+        <span class="svc-emblem">${SVC_ILLUS[s.illus]||""}</span>
+        <h3>${esc(s.title)}</h3><p>${esc(s.desc)}</p>
+      </div>
     </article>`;
   }).join("") + `
     <article class="svc-cta reveal">
-      <h3>Not sure what<br>you need?</h3>
-      <p>Tell us about your ride and we'll point you to the right package.</p>
-      <a class="btn btn-ghost" data-book>Book a Detail</a>
+      <span class="cta-bolt tl"></span><span class="cta-bolt tr"></span><span class="cta-bolt bl"></span><span class="cta-bolt br"></span>
+      <span class="cta-sun" aria-hidden="true"></span>
+      <div class="cta-copy">
+        <span class="cta-kicker">Roll up to the bay</span>
+        <h3>Not Sure What You Need?</h3>
+        <p>Tell us about your ride and we'll point you to the right package — no pressure, just good advice.</p>
+      </div>
+      <a class="btn cta-btn" data-book>Book a Detail &rarr;</a>
     </article>`;
 
   // why
