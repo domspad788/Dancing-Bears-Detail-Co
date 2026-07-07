@@ -216,8 +216,6 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 .review-pill .stars svg{width:14px;height:14px;color:var(--sun);fill:var(--sun)}
 .review-pill span{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;color:var(--ink)}
 .hero-lockup{width:min(560px,86vw);filter:drop-shadow(6px 10px 0 rgba(42,27,18,.18))}
-/* cinematic hero intro is handled by the React/GSAP #db-intro-root overlay (js/intro/) */
-#db-intro-root{position:absolute;inset:0;z-index:6}
 .hero-lockup{animation:lockupEmerge 2.2s var(--ease) .45s both}
 @keyframes lockupEmerge{0%{opacity:0;transform:translateY(16px) scale(.92);filter:drop-shadow(6px 10px 0 rgba(42,27,18,.18)) blur(9px)}55%{filter:drop-shadow(6px 10px 0 rgba(42,27,18,.18)) blur(0)}100%{opacity:1;transform:translateY(0) scale(1);filter:drop-shadow(6px 10px 0 rgba(42,27,18,.18)) blur(0)}}
 .hero .glow{animation:hiBloom 2.3s var(--ease) .2s both}
@@ -413,18 +411,21 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 /* Base color + section-specific pattern (contours / tie-dye / board / halftone) at 3–14%.
    Site-wide film grain is already supplied by the fixed .paper-grain overlay. */
 
-/* TRUST — warm aged poster paper */
+/* TRUST — warm aged poster paper + faded tie-dye rings */
 .trust{background:
-  radial-gradient(120% 90% at 15% 0%,rgba(217,164,65,.10),transparent 55%),
-  radial-gradient(110% 80% at 92% 42%,rgba(193,85,44,.06),transparent 55%),
+  repeating-radial-gradient(circle at 82% 8%,transparent 0 40px,rgba(107,78,122,.045) 40px 47px,transparent 47px 90px),
+  radial-gradient(120% 90% at 15% 0%,rgba(217,164,65,.16),transparent 55%),
+  radial-gradient(110% 80% at 92% 42%,rgba(193,85,44,.11),transparent 55%),
+  radial-gradient(90% 80% at 60% 120%,rgba(107,78,122,.08),transparent 55%),
   var(--cream)}
 
-/* PRICING — hand-painted cream board (plank seams + warm wash) */
+/* PRICING — hand-painted cream board (plank seams) + psychedelic wash */
 .pricing{background:
   repeating-linear-gradient(90deg,rgba(42,27,18,.045) 0 1px,transparent 1px 132px),
   repeating-linear-gradient(90deg,rgba(255,255,255,.16) 1px,transparent 2px 132px),
-  radial-gradient(130% 100% at 20% -10%,rgba(217,164,65,.10),transparent 55%),
-  radial-gradient(120% 90% at 85% 112%,rgba(75,107,68,.07),transparent 55%),
+  radial-gradient(130% 100% at 20% -10%,rgba(217,164,65,.16),transparent 55%),
+  radial-gradient(120% 90% at 85% 112%,rgba(75,107,68,.12),transparent 55%),
+  radial-gradient(90% 80% at 100% 10%,rgba(181,99,126,.09),transparent 52%),
   var(--cream)}
 
 /* PROCESS & CONTACT backgrounds are set on their original rules further down
@@ -432,25 +433,29 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 
 /* GALLERY — subtle psychedelic contours drifting over the sky */
 #results{position:relative}
-#results::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.06;
+#results::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.12;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cfilter id='pg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.008 0.011' numOctaves='2' seed='9'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.42 0 0 0 0 0.31 0 0 0 0 0.48 0 0 0 1 0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 1 0 0 0 0 1 0 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23pg)'/%3E%3C/svg%3E");
   background-size:540px 540px;animation:posterDrift 140s linear infinite}
 #results .sec-inner{position:relative;z-index:2}
 
 /* REVIEWS — faded vintage printed-paper halftone over the sky/video */
-#reviews::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.05;
-  background-image:radial-gradient(rgba(240,228,199,.9) 1px,transparent 1.6px);background-size:7px 7px}
+#reviews::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.08;
+  background-image:
+    repeating-radial-gradient(circle at 12% 90%,transparent 0 44px,rgba(90,111,160,.05) 44px 52px,transparent 52px 100px),
+    radial-gradient(rgba(240,228,199,.9) 1px,transparent 1.6px);
+  background-size:auto,7px 7px}
 
 /* HERO — strongest: flowing contour + faded tie-dye + warm lighting beneath the logo */
 .hero .hero-wrap{position:relative;z-index:2}
 .hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(60% 42% at 50% 6%,rgba(232,190,107,.20),transparent 60%),
-    radial-gradient(55% 46% at 15% 30%,rgba(107,78,122,.13),transparent 62%),
-    radial-gradient(50% 46% at 86% 24%,rgba(193,85,44,.11),transparent 62%),
-    radial-gradient(60% 56% at 74% 90%,rgba(75,107,68,.09),transparent 62%);
+    repeating-radial-gradient(circle at 50% 14%,transparent 0 48px,rgba(107,78,122,.06) 48px 57px,transparent 57px 108px),
+    radial-gradient(62% 44% at 50% 6%,rgba(232,190,107,.28),transparent 60%),
+    radial-gradient(56% 48% at 14% 30%,rgba(107,78,122,.19),transparent 62%),
+    radial-gradient(52% 48% at 87% 24%,rgba(193,85,44,.17),transparent 62%),
+    radial-gradient(62% 58% at 74% 90%,rgba(75,107,68,.14),transparent 62%);
   animation:heroBreath 15s ease-in-out infinite}
-.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.10;
+.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.17;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='ph'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007 0.01' numOctaves='2' seed='4'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.36 0 0 0 0 0.51 0 0 0 0 0.65 0 0 0 1 0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 1 0 0 0 0 1 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ph)'/%3E%3C/svg%3E");
   background-size:620px 620px;animation:posterDrift 170s linear infinite}
 
@@ -533,7 +538,9 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 /* ---------- process ---------- */
 .process{background:
     radial-gradient(rgba(42,27,18,.05) 1px,transparent 1.5px) 0 0/8px 8px,
-    radial-gradient(120% 90% at 80% 0%,rgba(90,111,160,.06),transparent 55%),
+    repeating-radial-gradient(circle at 15% 12%,transparent 0 42px,rgba(90,111,160,.05) 42px 50px,transparent 50px 96px),
+    radial-gradient(120% 90% at 80% 0%,rgba(90,111,160,.12),transparent 55%),
+    radial-gradient(110% 90% at 10% 100%,rgba(75,107,68,.09),transparent 55%),
     var(--cream);position:relative}
 .proc-wrap{position:relative;margin-top:56px}
 .proc-road{display:none;position:absolute;left:8%;right:8%;top:35px;height:4px;
@@ -590,10 +597,12 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 
 /* ---------- contact ---------- */
 .contact{background:
-    radial-gradient(55% 45% at 18% 22%,rgba(107,78,122,.12),transparent 62%),
-    radial-gradient(50% 42% at 82% 18%,rgba(193,85,44,.09),transparent 62%),
-    radial-gradient(58% 52% at 72% 84%,rgba(75,107,68,.08),transparent 62%),
-    radial-gradient(50% 48% at 26% 82%,rgba(90,111,160,.09),transparent 62%),
+    repeating-radial-gradient(circle at 20% 24%,transparent 0 50px,rgba(107,78,122,.06) 50px 60px,transparent 60px 112px),
+    repeating-radial-gradient(circle at 80% 82%,transparent 0 44px,rgba(75,107,68,.05) 44px 53px,transparent 53px 100px),
+    radial-gradient(55% 45% at 18% 22%,rgba(107,78,122,.20),transparent 62%),
+    radial-gradient(50% 42% at 82% 18%,rgba(193,85,44,.15),transparent 62%),
+    radial-gradient(58% 52% at 72% 84%,rgba(75,107,68,.13),transparent 62%),
+    radial-gradient(50% 48% at 26% 82%,rgba(90,111,160,.15),transparent 62%),
     var(--cream)}
 .contact-grid{display:grid;gap:40px}
 @media(min-width:1024px){.contact-grid{grid-template-columns:.9fr 1.1fr;gap:64px}}
@@ -733,7 +742,6 @@ footer.site{background:var(--forest-deep)}
   .reveal{opacity:1;transform:none}
 }
 </style>
-<link rel="stylesheet" href="js/intro/intro.bundle.css">
 </head>
 <body>
 
@@ -810,7 +818,6 @@ footer.site{background:var(--forest-deep)}
   <div class="glow"></div>
   <svg class="sparkle float" style="left:8%;top:22%;width:24px;height:24px" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 L14.2 9.8 L24 12 L14.2 14.2 L12 24 L9.8 14.2 L0 12 L9.8 9.8 Z" fill="#F0E4C7" stroke="#2A1B12" stroke-width="1"/></svg>
   <svg class="sparkle float-slow" style="right:10%;top:30%;width:16px;height:16px" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0 L14.2 9.8 L24 12 L14.2 14.2 L12 24 L9.8 14.2 L0 12 L9.8 9.8 Z" fill="#E8BE6B" stroke="#2A1B12" stroke-width="1"/></svg>
-  <div id="db-intro-root" aria-hidden="true"></div>
   <div class="container sec-inner" style="padding-bottom:0">
     <div class="hero-wrap">
       <div class="review-pill reveal">
@@ -1133,7 +1140,6 @@ footer.site{background:var(--forest-deep)}
 
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <!-- Motion (motion.dev) — Framer Motion's vanilla engine; powers spring/scroll/stagger sequences. Vendored locally to keep the page self-contained. -->
-<script src="js/intro/intro.bundle.js" defer></script>
 <script src="js/motion.js"></script>
 <script>
 /* ===== EDIT THESE ===== */
