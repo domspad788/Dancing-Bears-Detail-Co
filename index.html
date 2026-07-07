@@ -53,7 +53,7 @@
 <link rel="apple-touch-icon" href="images/favicon-180.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Anton&family=Permanent+Marker&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Bevan&family=Anton&family=Permanent+Marker&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&display=swap" rel="stylesheet" />
 <style>
 /* ============ DANCING BEARS DETAIL CO. — vintage door-hanger system ============ */
 :root{
@@ -96,15 +96,15 @@ a{color:inherit;text-decoration:none}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:700;text-transform:uppercase;
   font-size:.72rem;letter-spacing:.16em;color:var(--ink);background:var(--sun);
   border:2px solid var(--ink);border-radius:999px;padding:.4rem .9rem;box-shadow:3px 3px 0 0 var(--ink)}
-.section-title{font-family:"Bevan",serif;text-transform:uppercase;color:var(--ink);
+.section-title{font-family:"Rye",serif;text-transform:uppercase;color:var(--ink);
   font-size:clamp(2rem,5.2vw,3.9rem);line-height:.98;letter-spacing:.005em;margin:0}
-.title-poster{font-family:"Bevan",serif;text-transform:uppercase;margin:0;
+.title-poster{font-family:"Rye",serif;text-transform:uppercase;margin:0;
   font-size:clamp(2.4rem,7vw,5rem);line-height:.92;letter-spacing:.01em;
   background:linear-gradient(180deg,#E8BE6B 0%,#C1552C 48%,#A13D2B 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   -webkit-text-stroke:2px #F0E4C7;paint-order:stroke fill;
   filter:drop-shadow(3px 4px 0 rgba(42,27,18,.45))}
-.title-puffy{font-family:"Bevan",serif;text-transform:uppercase;margin:0;color:#F0E4C7;
+.title-puffy{font-family:"Rye",serif;text-transform:uppercase;margin:0;color:#F0E4C7;
   -webkit-text-stroke:2px var(--ink);paint-order:stroke fill;
   filter:drop-shadow(2px 3px 0 rgba(42,27,18,.5));letter-spacing:.01em}
 .lead{color:rgba(42,27,18,.72);font-size:clamp(1rem,1.6vw,1.18rem);max-width:60ch}
@@ -173,7 +173,7 @@ header.nav.scrolled .brand img{width:37px;height:37px}
   50%{box-shadow:4px 4px 0 0 var(--ink),0 0 0 7px rgba(242,106,33,.28),0 10px 20px -8px rgba(242,106,33,.4)}}
 .nav-cta.pulse{animation:navpulse 1.3s var(--ease-out)}
 @media(prefers-reduced-motion:reduce){.nav-cta.pulse{animation:none}.brand img,header.nav.scrolled .nav-row{transition:none}}
-.brand .wm1{display:block;font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.06em;font-size:1.05rem;color:var(--ink);line-height:1}
+.brand .wm1{display:block;font-family:"Rye",serif;text-transform:uppercase;letter-spacing:.06em;font-size:1.05rem;color:var(--ink);line-height:1}
 .brand .wm2{display:block;font-weight:700;text-transform:uppercase;font-size:.54rem;letter-spacing:.34em;color:var(--flame);margin-top:2px}
 .nav-links{display:none;align-items:center;gap:28px}
 .nav-links a{position:relative;font-size:.88rem;font-weight:700;color:rgba(42,27,18,.75);transition:color .2s}
@@ -186,7 +186,7 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 #drawer{position:fixed;inset:0;z-index:95;background:var(--sky);display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:6px;padding:24px;opacity:0;pointer-events:none;transition:opacity .25s}
 #drawer.open{opacity:1;pointer-events:auto}
-#drawer a.dl{font-family:"Bevan",serif;text-transform:uppercase;font-size:1.7rem;letter-spacing:.02em;
+#drawer a.dl{font-family:"Rye",serif;text-transform:uppercase;font-size:1.7rem;letter-spacing:.02em;
   color:var(--cream);padding:8px 0;-webkit-text-stroke:1.5px var(--ink);paint-order:stroke fill}
 
 /* ---------- hero ---------- */
@@ -213,6 +213,15 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 @keyframes hiLockupRM{0%{opacity:0}100%{opacity:1}}
 @keyframes hiGlowRM{0%{opacity:0;transform:translateX(-50%)}100%{opacity:.9;transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.hero-lockup{animation:hiLockupRM 1s var(--ease) .15s both!important}.hero .glow{animation:hiGlowRM 1.1s var(--ease) .1s both!important}.hero-wrap>.reveal{transition-delay:0s!important}}
+/* ---------- dancing-bears parade ---------- */
+.bear-parade{position:relative;z-index:3;overflow:hidden;margin:26px 0 0;padding:6px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.bear-parade .track{display:flex;gap:28px;width:max-content;animation:bearMarch 30s linear infinite}
+.bear-parade svg.b{width:48px;height:63px;flex:0 0 auto;filter:drop-shadow(2px 3px 0 rgba(42,27,18,.2));animation:bearBob 1.05s ease-in-out infinite}
+.bear-parade .b.y{color:#F2C230}.bear-parade .b.o{color:#E8621E}.bear-parade .b.bl{color:#2E6FC9}.bear-parade .b.rd{color:#D63A2E}.bear-parade .b.pk{color:#E86AA8}
+.bear-parade .b:nth-child(2n){animation-delay:-.52s}.bear-parade .b:nth-child(3n){animation-delay:-.34s}.bear-parade .b:nth-child(5n){animation-delay:-.78s}
+@keyframes bearMarch{to{transform:translateX(-50%)}}
+@keyframes bearBob{50%{transform:translateY(-7px) rotate(-3deg)}}
+@media(prefers-reduced-motion:reduce){.bear-parade .track{animation:none}.bear-parade svg.b{animation:none}}
 .hero-tagline{font-weight:700;font-style:italic;color:var(--ink);font-size:clamp(1.05rem,2.4vw,1.35rem);margin:8px 0 12px;letter-spacing:-.01em}
 .hero-btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:32px}
 .hero-sub{font-size:.82rem;font-weight:700;color:#2C4A61;margin-top:20px;text-transform:uppercase;letter-spacing:.04em}
@@ -269,7 +278,7 @@ header.nav.scrolled .brand img{width:37px;height:37px}
   background:rgba(255,255,255,.56);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.72);
   box-shadow:6px 8px 0 0 var(--ink),0 34px 54px -30px rgba(42,27,18,.5)}
 .feature-info .fi-cat{font-size:.7rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--flame)}
-.feature-info h3{font-family:"Bevan",serif;text-transform:uppercase;font-size:clamp(1.55rem,3vw,2.15rem);line-height:1.02;
+.feature-info h3{font-family:"Rye",serif;text-transform:uppercase;font-size:clamp(1.55rem,3vw,2.15rem);line-height:1.02;
   margin:12px 0 20px;color:var(--ink);-webkit-text-stroke:1.2px var(--ink);paint-order:stroke fill}
 .fi-meta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
 .fi-meta .chip{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.82rem;color:var(--ink);
@@ -303,7 +312,7 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 .folio-card .fchip svg{width:13px;height:13px}
 .folio-card .folio-meta{display:block;padding:14px 6px 16px}
 .folio-card .fcat{font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--flame)}
-.folio-card .ftitle{display:block;font-family:"Bevan",serif;text-transform:uppercase;font-size:1.1rem;line-height:1.1;margin-top:4px;letter-spacing:.01em;color:var(--ink)}
+.folio-card .ftitle{display:block;font-family:"Rye",serif;text-transform:uppercase;font-size:1.1rem;line-height:1.1;margin-top:4px;letter-spacing:.01em;color:var(--ink)}
 @media(hover:none){.folio-card:hover{transform:none}.folio-card:hover img{transform:none}}
 
 /* ---------- services / why ---------- */
@@ -343,10 +352,10 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 .svc::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:12px;opacity:.4;mix-blend-mode:soft-light;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='cg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cg)' opacity='0.6'/%3E%3C/svg%3E");background-size:130px 130px}
 .svc-in{position:relative;z-index:2;display:flex;flex-direction:column;height:100%;padding:28px 24px 30px}
-.svc h3{font-family:"Bevan",serif;font-size:1.3rem;line-height:1.06;margin:0 0 9px;letter-spacing:.01em}
+.svc h3{font-family:"Rye",serif;font-size:1.3rem;line-height:1.06;margin:0 0 9px;letter-spacing:.01em}
 .svc p{font-size:.93rem;line-height:1.5;margin:0}
 
-.svc-tag{position:absolute;top:-13px;left:20px;z-index:5;font-family:"Bevan",serif;font-size:.86rem;line-height:1;
+.svc-tag{position:absolute;top:-13px;left:20px;z-index:5;font-family:"Rye",serif;font-size:.86rem;line-height:1;
   padding:7px 11px 6px;background:#F4ECD6;color:var(--ink);border:2.5px solid var(--ink);border-radius:8px;
   box-shadow:3px 3px 0 0 var(--ink);transform:rotate(-5deg)}
 .svc-tag::before{content:"NO. ";font-size:.6rem;letter-spacing:.08em;opacity:.68}
@@ -384,10 +393,10 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 .cta-bolt.tl{top:12px;left:12px}.cta-bolt.tr{top:12px;right:12px}.cta-bolt.bl{bottom:12px;left:12px}.cta-bolt.br{bottom:12px;right:12px}
 .cta-copy{position:relative;z-index:2;flex:1 1 340px;min-width:260px}
 .cta-kicker{display:inline-block;font-family:"Permanent Marker",cursive;font-size:.95rem;color:var(--sun-light);margin-bottom:6px}
-.svc-cta h3{font-family:"Bevan",serif;text-transform:uppercase;font-size:clamp(1.5rem,3.4vw,2.15rem);line-height:.98;margin:0 0 8px;color:#FBF5E6;-webkit-text-stroke:1.6px var(--ink);paint-order:stroke fill}
+.svc-cta h3{font-family:"Rye",serif;text-transform:uppercase;font-size:clamp(1.5rem,3.4vw,2.15rem);line-height:.98;margin:0 0 8px;color:#FBF5E6;-webkit-text-stroke:1.6px var(--ink);paint-order:stroke fill}
 .svc-cta p{color:rgba(247,240,221,.9);font-size:.97rem;font-weight:500;margin:0}
 .cta-btn{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;background:var(--sun);color:var(--ink);
-  border:2.5px solid var(--ink);border-radius:11px;padding:15px 24px;font-family:"Bevan",serif;font-size:1.02rem;
+  border:2.5px solid var(--ink);border-radius:11px;padding:15px 24px;font-family:"Rye",serif;font-size:1.02rem;
   box-shadow:4px 4px 0 0 var(--ink);cursor:pointer;white-space:nowrap;
   transition:transform .2s var(--ease-out),box-shadow .2s var(--ease-out)}
 .cta-btn:hover{transform:translate(-2px,-3px);box-shadow:7px 7px 0 0 var(--ink)}
@@ -467,7 +476,7 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 .price-card:hover .icirc{animation:wiggle 3s ease-in-out infinite}
 .price-card .icirc{margin-bottom:18px}
 .price-card h3{font-size:1.35rem;font-weight:800;margin:0 0 6px;color:var(--ink)}
-.price-card .price{font-family:"Bevan",serif;color:var(--ink);font-size:1.02rem;margin:0 0 14px;line-height:1.2}
+.price-card .price{font-family:"Rye",serif;color:var(--ink);font-size:1.02rem;margin:0 0 14px;line-height:1.2}
 .price-card .price b{color:var(--flame);font-size:1.55rem;margin-left:4px;-webkit-text-stroke:.5px var(--ink);paint-order:stroke fill}
 .price-card p{color:rgba(42,27,18,.72);font-size:.95rem;margin:0;line-height:1.5}
 .price-card .bar{position:absolute;left:0;bottom:0;height:6px;width:100%}
@@ -487,7 +496,7 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 .story-visual .photo{position:absolute;right:-12px;bottom:-24px;width:52%;border-radius:12px;overflow:hidden;border:3px solid var(--ink);box-shadow:4px 4px 0 0 var(--ink);background:var(--cream);transform:rotate(3deg)}
 .story-visual .est{position:absolute;left:-12px;top:-20px;width:88px;height:88px;border-radius:999px;background:var(--sun);
   border:3px solid var(--ink);box-shadow:4px 4px 0 0 var(--ink);display:grid;place-items:center;text-align:center;transform:rotate(-6deg)}
-.story-visual .est span{font-family:"Bevan",serif;text-transform:uppercase;color:var(--ink);line-height:1;font-size:.72rem}
+.story-visual .est span{font-family:"Rye",serif;text-transform:uppercase;color:var(--ink);line-height:1;font-size:.72rem}
 .story h2{margin:16px 0 24px}
 .story .pts{margin-top:32px;display:grid;gap:14px}
 .story .pt{display:flex;gap:12px;align-items:flex-start}
@@ -549,7 +558,7 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 @media(min-width:768px){.proc-step{align-items:flex-start;text-align:left}}
 .proc-step .n{width:72px;height:72px;border-radius:999px;border:3px solid var(--ink);box-shadow:4px 4px 0 0 var(--ink);
   display:grid;place-items:center;position:relative;z-index:2}
-.proc-step .n span{font-family:"Bevan",serif;font-size:1.5rem;color:#fff}
+.proc-step .n span{font-family:"Rye",serif;font-size:1.5rem;color:#fff}
 .proc-step h3{font-size:1.12rem;font-weight:800;margin:24px 0 8px;color:var(--ink)}
 .proc-step p{color:rgba(42,27,18,.65);font-size:.9rem;max-width:26ch;margin:0}
 
@@ -565,7 +574,7 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 .rev-card .rstars svg{width:19px;height:19px;color:var(--sun);fill:var(--sun)}
 .rev-card p.q{font-size:1.1rem;line-height:1.55;color:var(--ink);font-weight:500;margin:0}
 .rev-card .who{margin-top:24px;display:flex;align-items:center;gap:14px}
-.rev-card .av{width:48px;height:48px;border-radius:999px;display:grid;place-items:center;font-family:"Bevan",serif;
+.rev-card .av{width:48px;height:48px;border-radius:999px;display:grid;place-items:center;font-family:"Rye",serif;
   color:#fff;font-size:1.1rem;border:2.5px solid var(--ink);flex:0 0 auto}
 .rev-card .who .nm{font-weight:800;font-size:.95rem;color:var(--ink)}
 .rev-card .who .mt{font-size:.78rem;color:rgba(42,27,18,.7)}
@@ -588,7 +597,7 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 .marquee{overflow:hidden;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);background:var(--sun);color:var(--ink)}
 .marquee .track{display:flex;width:max-content;animation:marquee 32s linear infinite;padding:10px 0 10px 20px}
 .marquee .grp{display:flex;align-items:center;flex:0 0 auto}
-.marquee .grp span{font-family:"Bevan",serif;text-transform:uppercase;letter-spacing:.02em;font-size:1.05rem;white-space:nowrap;padding-right:20px}
+.marquee .grp span{font-family:"Rye",serif;text-transform:uppercase;letter-spacing:.02em;font-size:1.05rem;white-space:nowrap;padding-right:20px}
 .marquee .grp .dot{font-size:1rem;padding-right:20px}
 
 /* ---------- contact ---------- */
@@ -637,14 +646,14 @@ footer.site{background:var(--forest-deep)}
 @media(min-width:1024px){.foot-brand{grid-column:auto}}
 .foot-brand .fb{display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .foot-brand .fb img{width:44px;height:44px;border-radius:999px;object-fit:cover;border:2.5px solid var(--cream)}
-.foot-brand .fb .w1{display:block;font-family:"Anton",sans-serif;text-transform:uppercase;letter-spacing:.06em;font-size:1.05rem;color:var(--cream);line-height:1}
+.foot-brand .fb .w1{display:block;font-family:"Rye",serif;text-transform:uppercase;letter-spacing:.06em;font-size:1.05rem;color:var(--cream);line-height:1}
 .foot-brand .fb .w2{display:block;font-weight:700;text-transform:uppercase;font-size:.54rem;letter-spacing:.32em;color:var(--sun);margin-top:2px}
 .foot-brand p{color:rgba(251,243,222,.8);font-size:.9rem;max-width:34ch;font-weight:500;margin:0}
 .socials{display:flex;gap:12px;margin-top:20px}
 .socials a{width:40px;height:40px;border-radius:999px;background:var(--cream);border:2.5px solid var(--ink);display:grid;place-items:center;color:var(--ink);transition:background .2s}
 .socials a:hover{background:var(--sun)}
 .socials a svg{width:18px;height:18px}
-.fcol h4{font-family:"Bevan",serif;text-transform:uppercase;font-size:.95rem;color:var(--cream);margin:0 0 16px}
+.fcol h4{font-family:"Rye",serif;text-transform:uppercase;font-size:.95rem;color:var(--cream);margin:0 0 16px}
 .fcol a,.fcol p{display:block;color:rgba(251,243,222,.75);font-size:.9rem;padding:6px 0;transition:color .2s;margin:0}
 .fcol a:hover{color:var(--sun)}
 .foot-bottom{border-top:2px solid rgba(251,243,222,.2);padding:24px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
@@ -668,7 +677,7 @@ footer.site{background:var(--forest-deep)}
 #lightbox.show .lb-stage{transform:scale(1);opacity:1}
 #lightbox img{display:block;max-width:94vw;max-height:74vh;border:3px solid var(--cream);border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.7)}
 #lightbox .lb-cap{margin-top:16px;text-align:center;color:var(--cream)}
-#lightbox .lb-cap .t{font-family:"Bevan",serif;text-transform:uppercase;font-size:1rem;letter-spacing:.02em}
+#lightbox .lb-cap .t{font-family:"Rye",serif;text-transform:uppercase;font-size:1rem;letter-spacing:.02em}
 #lightbox .lb-cap .c{display:block;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#FFD37A;margin-top:6px}
 #lightbox .lb-count{display:block;font-size:.72rem;color:rgba(251,243,222,.6);margin-top:8px;font-weight:600}
 #lightbox .nav,#lightbox .close{position:absolute;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:blur(10px);
@@ -779,7 +788,7 @@ footer.site{background:var(--forest-deep)}
 <header class="nav" id="nav">
   <div class="container nav-row">
     <a href="#home" class="brand" aria-label="Dancing Bears Detail Co. home">
-      <picture><source type="image/avif" srcset="images/photo-02.avif"><source type="image/webp" srcset="images/photo-02.webp"><img src="images/photo-02.jpg" alt="Dancing Bears Detail Co. logo" width="600" height="716" loading="lazy" decoding="async" /></picture>
+      <picture><source type="image/webp" srcset="images/emblem.webp"><img src="images/emblem.png" alt="Dancing Bears Detail Co. logo" width="256" height="256" loading="lazy" decoding="async" /></picture>
       <span><span class="wm1">Dancing Bears</span><span class="wm2">Detail Co.</span></span>
     </a>
     <nav class="nav-links" aria-label="Primary">
@@ -828,6 +837,13 @@ footer.site{background:var(--forest-deep)}
         <a class="btn btn-ghost" href="tel:+15183312299"><i data-lucide="phone"></i> (518) 331-2299</a>
       </div>
       <p class="hero-sub reveal">We come to you · Schenectady · Albany · Saratoga</p>
+    </div>
+  </div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="dbear" viewBox="0 0 64 84"><g stroke="#2A1B12" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><ellipse cx="12" cy="24" rx="6" ry="11.5" fill="currentColor" transform="rotate(-38 12 24)"/><ellipse cx="52" cy="40" rx="6" ry="11.5" fill="currentColor" transform="rotate(38 52 40)"/><ellipse cx="24" cy="72" rx="6.5" ry="11.5" fill="currentColor" transform="rotate(-13 24 72)"/><ellipse cx="42" cy="72" rx="6.5" ry="11.5" fill="currentColor" transform="rotate(19 42 72)"/><path d="M20 34 Q17 54 23 66 Q32 71 41 66 Q47 54 44 34 Z" fill="currentColor"/><circle cx="20" cy="12" r="7" fill="currentColor"/><circle cx="44" cy="12" r="7" fill="currentColor"/><circle cx="32" cy="20" r="15" fill="currentColor"/></g><circle cx="26.5" cy="18" r="2.1" fill="#2A1B12"/><circle cx="37.5" cy="18" r="2.1" fill="#2A1B12"/><ellipse cx="32" cy="25" rx="6" ry="4.6" fill="#F0E4C7"/><circle cx="32" cy="23.6" r="1.8" fill="#2A1B12"/></symbol></svg>
+  <div class="bear-parade" aria-hidden="true">
+    <div class="track">
+      <svg class="b y" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b o" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b bl" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b rd" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b pk" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b y" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b o" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b bl" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b rd" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b pk" viewBox="0 0 64 84"><use href="#dbear"/></svg>
+      <svg class="b y" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b o" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b bl" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b rd" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b pk" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b y" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b o" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b bl" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b rd" viewBox="0 0 64 84"><use href="#dbear"/></svg><svg class="b pk" viewBox="0 0 64 84"><use href="#dbear"/></svg>
     </div>
   </div>
   <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0,40 C240,92 480,0 720,40 C960,82 1200,8 1440,40 L1440,80 L0,80 Z" fill="#F0E4C7"/></svg>
@@ -1082,7 +1098,7 @@ footer.site{background:var(--forest-deep)}
     <div class="foot-grid">
       <div class="foot-brand">
         <a href="#home" class="fb">
-          <picture><source type="image/avif" srcset="images/photo-07.avif"><source type="image/webp" srcset="images/photo-07.webp"><img src="images/photo-07.jpg" alt="Dancing Bears Detail Co. logo" width="600" height="716" loading="lazy" decoding="async" /></picture>
+          <picture><source type="image/webp" srcset="images/emblem.webp"><img src="images/emblem.png" alt="Dancing Bears Detail Co. logo" width="256" height="256" loading="lazy" decoding="async" /></picture>
           <span><span class="w1">Dancing Bears</span><span class="w2">Detail Co.</span></span>
         </a>
         <p>Friendly mobile detailing across the Capital Region. We come to you — what a long strange trip it's been… for your car.</p>
