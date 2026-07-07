@@ -105,8 +105,8 @@ a{color:inherit;text-decoration:none}
   -webkit-text-stroke:2px #F0E4C7;paint-order:stroke fill;
   filter:drop-shadow(3px 4px 0 rgba(42,27,18,.45))}
 .title-puffy{font-family:"Bagel Fat One",cursive;text-transform:uppercase;margin:0;color:#F0E4C7;
-  -webkit-text-stroke:2px var(--ink);paint-order:stroke fill;
-  filter:drop-shadow(2px 3px 0 rgba(42,27,18,.5));letter-spacing:.01em}
+  -webkit-text-stroke:3px var(--ink);paint-order:stroke fill;
+  filter:drop-shadow(2px 3px 0 rgba(42,27,18,.55)) drop-shadow(0 0 7px rgba(42,27,18,.45));letter-spacing:.01em}
 .lead{color:rgba(42,27,18,.72);font-size:clamp(1rem,1.6vw,1.18rem);max-width:60ch}
 .italic-tag{font-weight:700;font-style:italic}
 
@@ -736,19 +736,18 @@ footer.site{background:var(--forest-deep)}
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
   background-size:160px 160px}
 .paper-grain::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,transparent 55%,rgba(42,27,18,.10) 100%)}
-/* GLOBAL PSYCHEDELIC WASH — bold vibrant rainbow tie-dye swirl, dimmed via opacity+multiply so text stays legible */
-.psych-wash{position:fixed;inset:-60%;z-index:998;pointer-events:none;opacity:.30;mix-blend-mode:multiply;
+/* GLOBAL PSYCHEDELIC WASH — vibrant rainbow tie-dye that sits BEHIND all content, so opaque cards
+   and real before/after photos stay clean while open areas (hero, reviews) show the swirl */
+.psych-wash{position:fixed;inset:-60%;z-index:-1;pointer-events:none;opacity:.85;
   background:
-    repeating-radial-gradient(circle at 32% 30%,transparent 0 24px,rgba(232,58,138,.6) 24px 40px,transparent 40px 72px),
-    repeating-radial-gradient(circle at 72% 66%,transparent 0 22px,rgba(46,127,212,.6) 22px 38px,transparent 38px 70px),
-    repeating-radial-gradient(circle at 50% 90%,transparent 0 28px,rgba(63,184,74,.55) 28px 44px,transparent 44px 78px),
-    conic-gradient(from 0deg at 46% 48%,#E83A8A,#F2A020,#F5E020,#3FB84A,#2E7FD4,#7A3FC0,#E83A8A);
-  animation:psychSpin 150s linear infinite}
+    repeating-radial-gradient(circle at 30% 28%,rgba(232,58,138,.4) 0 20px,transparent 20px 44px),
+    repeating-radial-gradient(circle at 72% 66%,rgba(46,127,212,.4) 0 18px,transparent 18px 42px),
+    repeating-radial-gradient(circle at 50% 90%,rgba(63,184,74,.34) 0 24px,transparent 24px 50px),
+    conic-gradient(from 0deg at 46% 48%,#EBB4CB,#EBC58C,#EDDA8E,#A9D6AE,#A6C3E0,#C7A9DA,#EBB4CB);
+  animation:psychSpin 160s linear infinite}
 .psych-wash::after{content:"";position:absolute;inset:0;
-  background:
-    repeating-radial-gradient(circle at 58% 40%,transparent 0 36px,rgba(122,63,192,.5) 36px 54px,transparent 54px 100px),
-    repeating-conic-gradient(from 18deg at 40% 60%,rgba(245,224,32,0) 0 7deg,rgba(245,224,32,.4) 7deg 15deg,rgba(245,224,32,0) 15deg 28deg);
-  animation:psychSpin 220s linear infinite reverse}
+  background:repeating-radial-gradient(circle at 58% 40%,rgba(122,63,192,.28) 0 30px,transparent 30px 60px);
+  animation:psychSpin 240s linear infinite reverse}
 @keyframes psychSpin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.psych-wash,.psych-wash::after{animation:none}}
 /* touch devices fire hover on tap -> don't leave lift/zoom stuck */
