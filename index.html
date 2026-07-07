@@ -433,17 +433,19 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 
 /* GALLERY — subtle psychedelic contours drifting over the sky */
 #results{position:relative}
-#results::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.12;
+#results::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.18;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='520'%3E%3Cfilter id='pg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.008 0.011' numOctaves='2' seed='9'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.42 0 0 0 0 0.31 0 0 0 0 0.48 0 0 0 1 0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 1 0 0 0 0 1 0 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23pg)'/%3E%3C/svg%3E");
   background-size:540px 540px;animation:posterDrift 140s linear infinite}
 #results .sec-inner{position:relative;z-index:2}
 
 /* REVIEWS — faded vintage printed-paper halftone over the sky/video */
-#reviews::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.08;
+#reviews::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.16;
   background-image:
-    repeating-radial-gradient(circle at 12% 90%,transparent 0 44px,rgba(90,111,160,.05) 44px 52px,transparent 52px 100px),
+    repeating-radial-gradient(circle at 12% 90%,transparent 0 46px,rgba(107,78,122,.5) 46px 56px,transparent 56px 108px),
+    repeating-radial-gradient(circle at 88% 12%,transparent 0 40px,rgba(217,164,65,.5) 40px 50px,transparent 50px 100px),
     radial-gradient(rgba(240,228,199,.9) 1px,transparent 1.6px);
-  background-size:auto,7px 7px}
+  background-size:auto,auto,7px 7px}
+#reviews .sec-inner{position:relative;z-index:2}
 
 /* HERO — strongest: flowing contour + faded tie-dye + warm lighting beneath the logo */
 .hero .hero-wrap{position:relative;z-index:2}
@@ -455,14 +457,18 @@ header.nav.scrolled .brand img{width:37px;height:37px}
     radial-gradient(52% 48% at 87% 24%,rgba(193,85,44,.17),transparent 62%),
     radial-gradient(62% 58% at 74% 90%,rgba(75,107,68,.14),transparent 62%);
   animation:heroBreath 15s ease-in-out infinite}
-.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.17;
+.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.22;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='ph'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.007 0.01' numOctaves='2' seed='4'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.36 0 0 0 0 0.51 0 0 0 0 0.65 0 0 0 1 0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 1 0 0 0 0 1 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ph)'/%3E%3C/svg%3E");
   background-size:620px 620px;animation:posterDrift 170s linear infinite}
 
 @keyframes posterDrift{to{background-position:540px 0}}
 @keyframes heroBreath{0%,100%{opacity:.82}50%{opacity:1}}
 @media(prefers-reduced-motion:reduce){#results::before,.hero::after,.hero::before{animation:none}}
-.why{background:var(--forest-deep);position:relative}
+.why{background:
+  repeating-radial-gradient(circle at 18% 20%,transparent 0 54px,rgba(217,164,65,.12) 54px 64px,transparent 64px 128px),
+  repeating-radial-gradient(circle at 84% 78%,transparent 0 48px,rgba(193,85,44,.14) 48px 58px,transparent 58px 118px),
+  radial-gradient(80% 70% at 50% 0%,rgba(217,164,65,.14),transparent 60%),
+  var(--forest-deep);position:relative}
 .why .why-card{padding:24px 24px 32px}
 .why .why-card h3{font-size:1.1rem;font-weight:800;margin:0 0 8px;color:var(--ink)}
 .why .why-card p{color:rgba(42,27,18,.7);font-size:.9rem;margin:0}
@@ -483,7 +489,12 @@ header.nav.scrolled .brand img{width:37px;height:37px}
 .price-note{text-align:center;max-width:58ch;margin:36px auto 0;color:rgba(42,27,18,.7);font-size:.95rem;font-weight:500}
 
 /* ---------- brand story ---------- */
-.story{position:relative;overflow:hidden;background:radial-gradient(120% 120% at 85% 10%,rgba(255,194,30,.18),transparent 50%),#F6E9C8}
+.story{position:relative;overflow:hidden;background:
+  repeating-radial-gradient(circle at 12% 84%,transparent 0 60px,rgba(107,78,122,.09) 60px 72px,transparent 72px 142px),
+  repeating-radial-gradient(circle at 88% 16%,transparent 0 54px,rgba(193,85,44,.10) 54px 66px,transparent 66px 130px),
+  radial-gradient(120% 120% at 85% 10%,rgba(255,194,30,.22),transparent 50%),
+  radial-gradient(90% 80% at 8% 100%,rgba(75,107,68,.10),transparent 55%),
+  #F6E9C8}
 .story-grid{display:grid;gap:48px;align-items:center}
 @media(min-width:1024px){.story-grid{grid-template-columns:.95fr 1.05fr;gap:80px}}
 .story-visual{position:relative;max-width:440px;margin:0 auto;width:100%}
@@ -731,6 +742,18 @@ footer.site{background:var(--forest-deep)}
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
   background-size:160px 160px}
 .paper-grain::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,transparent 55%,rgba(42,27,18,.10) 100%)}
+/* GLOBAL PSYCHEDELIC WASH — whole-site oil-slick tie-dye tint above content, slow counter-rotating rings */
+.psych-wash{position:fixed;inset:-50%;z-index:998;pointer-events:none;opacity:.07;mix-blend-mode:multiply;
+  background:
+    repeating-radial-gradient(circle at 32% 30%,transparent 0 66px,rgba(107,78,122,.9) 66px 80px,transparent 80px 158px),
+    repeating-radial-gradient(circle at 74% 70%,transparent 0 58px,rgba(193,85,44,.9) 58px 72px,transparent 72px 150px),
+    conic-gradient(from 0deg at 50% 50%,rgba(75,107,68,.7),rgba(90,111,160,.7),rgba(217,164,65,.7),rgba(107,78,122,.7),rgba(193,85,44,.7),rgba(75,107,68,.7));
+  animation:psychSpin 220s linear infinite}
+.psych-wash::after{content:"";position:absolute;inset:0;
+  background:repeating-radial-gradient(circle at 58% 42%,transparent 0 94px,rgba(90,111,160,.85) 94px 108px,transparent 108px 202px);
+  animation:psychSpin 320s linear infinite reverse}
+@keyframes psychSpin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.psych-wash,.psych-wash::after{animation:none}}
 /* touch devices fire hover on tap -> don't leave lift/zoom stuck */
 @media(hover:none){
   .masonry .item:hover,.gal-item:hover,.method:hover,.rev-nav button.arrow:hover{transform:none}
@@ -746,6 +769,7 @@ footer.site{background:var(--forest-deep)}
 <body>
 
 <div class="paper-grain" aria-hidden="true"></div>
+<div class="psych-wash" aria-hidden="true"></div>
 
 <!-- SKY BACKDROP (fixed, animated, behind everything) -->
 <div class="sky-backdrop" aria-hidden="true">
