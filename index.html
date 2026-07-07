@@ -147,7 +147,6 @@ a{color:inherit;text-decoration:none}
 /* motion */
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes wiggle{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
-@keyframes sunspin{to{transform:rotate(360deg)}}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .float{animation:float 6s ease-in-out infinite}
 .float-slow{animation:float 9s ease-in-out infinite}
@@ -160,20 +159,6 @@ a{color:inherit;text-decoration:none}
 :focus-visible{outline:3px solid var(--flame);outline-offset:3px;border-radius:6px}
 .btn:focus-visible{outline-offset:4px}
 
-/* ---------- loader ---------- */
-#loader{position:fixed;inset:0;z-index:300;display:grid;place-items:center;overflow:hidden;
-  background:linear-gradient(180deg,#9DB7C7,#5C82A6);transition:opacity .7s ease}
-#loader.hide{opacity:0;pointer-events:none}
-#loader .sun{position:absolute;width:520px;height:520px;max-width:120vw;opacity:.7;animation:sunspin 22s linear infinite,sunbreathe 3.2s ease-in-out infinite}
-#loader .inner{position:relative;display:grid;place-items:center;gap:24px;text-align:center}
-#loader img{width:230px;filter:drop-shadow(4px 6px 0 rgba(42,27,18,.2));animation:loaderPop .7s cubic-bezier(.34,1.45,.5,1) both}
-#loader .bar{width:140px;height:8px;background:var(--cream);border-radius:999px;overflow:hidden;border:2px solid var(--ink)}
-#loader .bar span{display:block;height:100%;width:0;background:var(--flame);animation:loadbar 1.2s var(--ease) .2s forwards}
-@keyframes loadbar{to{width:100%}}
-@keyframes sunbreathe{0%,100%{opacity:.55}50%{opacity:.85}}
-@keyframes loaderPop{0%{opacity:0;transform:scale(.9)}60%{opacity:1}100%{opacity:1;transform:scale(1)}}
-/* reduced-motion: show a settled poster (full bar, logo at rest) instead of a stalled 0% bar */
-@media(prefers-reduced-motion:reduce){#loader .bar span{width:100%}#loader img{opacity:1;transform:none}#loader .sun{opacity:.7}}
 
 /* ---------- navbar ---------- */
 header.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--cream);
@@ -789,19 +774,6 @@ footer.site{background:var(--forest-deep)}
   <source data-src="media/ambient-sky.mp4" type="video/mp4">
 </video>
 
-<!-- LOADER -->
-<div id="loader">
-  <div class="sun">
-    <svg viewBox="0 0 200 200" aria-hidden="true">
-      <g id="sunrays"></g>
-      <circle cx="100" cy="100" r="40" fill="#E8BE6B" stroke="#2A1B12" stroke-width="3"/>
-    </svg>
-  </div>
-  <div class="inner">
-    <picture><source type="image/webp" srcset="images/photo-01.webp"><img src="images/photo-01.png" alt="Dancing Bears Detail Co." width="560" height="668" loading="lazy" decoding="async" /></picture>
-    <div class="bar"><span></span></div>
-  </div>
-</div>
 
 <!-- NAV -->
 <header class="nav" id="nav">
@@ -1283,11 +1255,6 @@ const METHODS = [
 
 /* ---- render helpers ---- */
 function render(){
-  // sun rays for loader
-  let rays="";
-  for(let i=0;i<24;i++){rays+=`<polygon points="100,6 107,58 93,58" fill="#D9A441" opacity="${i%2?0.8:1}" transform="rotate(${i*15} 100 100)"/>`;}
-  document.getElementById("sunrays").innerHTML = rays;
-
   // trust
   document.getElementById("trustGrid").innerHTML = TRUST.map((t,i)=>`
     <div class="badge reveal" style="transition-delay:${i*70}ms">
@@ -1417,9 +1384,6 @@ function renderGallery(filter){
 /* ---- interactions ---- */
 function init(){
   if(window.lucide) lucide.createIcons();
-
-  // loader
-  setTimeout(()=>{ document.getElementById("loader").classList.add("hide"); }, 1700);
 
   // nav scroll + drawer
   const nav=document.getElementById("nav"), drawer=document.getElementById("drawer"), hamb=document.getElementById("hamb");
