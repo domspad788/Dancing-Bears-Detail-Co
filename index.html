@@ -727,16 +727,16 @@ footer.site{background:var(--forest-deep)}
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
   background-size:160px 160px}
 .paper-grain::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,transparent 55%,rgba(42,27,18,.10) 100%)}
-/* GLOBAL PSYCHEDELIC WASH — whole-site oil-slick tie-dye tint above content, slow counter-rotating rings */
-.psych-wash{position:fixed;inset:-50%;z-index:998;pointer-events:none;opacity:.07;mix-blend-mode:multiply;
+/* GLOBAL PSYCHEDELIC WASH — whole-site DARKER-RAINBOW tie-dye, deep muted spectrum, kept low so text stays readable */
+.psych-wash{position:fixed;inset:-50%;z-index:998;pointer-events:none;opacity:.085;mix-blend-mode:multiply;
   background:
-    repeating-radial-gradient(circle at 32% 30%,transparent 0 66px,rgba(107,78,122,.9) 66px 80px,transparent 80px 158px),
-    repeating-radial-gradient(circle at 74% 70%,transparent 0 58px,rgba(193,85,44,.9) 58px 72px,transparent 72px 150px),
-    conic-gradient(from 0deg at 50% 50%,rgba(75,107,68,.7),rgba(90,111,160,.7),rgba(217,164,65,.7),rgba(107,78,122,.7),rgba(193,85,44,.7),rgba(75,107,68,.7));
-  animation:psychSpin 220s linear infinite}
+    repeating-radial-gradient(circle at 34% 32%,transparent 0 42px,rgba(74,46,90,.85) 42px 62px,transparent 62px 112px),
+    repeating-radial-gradient(circle at 70% 68%,transparent 0 38px,rgba(124,46,31,.8) 38px 58px,transparent 58px 108px),
+    conic-gradient(from 0deg at 46% 48%,#4A2E5A,#34324E,#2E4A6E,#2E5D5A,#35502F,#6E5A1E,#8A4A1E,#7C2E1F,#7A2E48,#4A2E5A);
+  animation:psychSpin 200s linear infinite}
 .psych-wash::after{content:"";position:absolute;inset:0;
-  background:repeating-radial-gradient(circle at 58% 42%,transparent 0 94px,rgba(90,111,160,.85) 94px 108px,transparent 108px 202px);
-  animation:psychSpin 320s linear infinite reverse}
+  background:repeating-radial-gradient(circle at 60% 40%,transparent 0 64px,rgba(46,74,110,.78) 64px 82px,transparent 82px 156px);
+  animation:psychSpin 300s linear infinite reverse}
 @keyframes psychSpin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.psych-wash,.psych-wash::after{animation:none}}
 /* touch devices fire hover on tap -> don't leave lift/zoom stuck */
@@ -848,7 +848,7 @@ footer.site{background:var(--forest-deep)}
         <span class="eyebrow">The Transformation</span>
         <h2 class="section-title" style="margin-top:16px">Before &amp; After</h2>
       </div>
-      <p class="lead reveal">Real rides, real results. Drag the slider to reveal a full floor-mat revival — then cruise through more transformations below.</p>
+      <p class="lead reveal">Real rides, real results. Drag the slider to reveal a full interior revival — then cruise through more transformations below.</p>
     </div>
     <div class="feature reveal">
       <div class="feature-media">
@@ -1060,7 +1060,7 @@ footer.site{background:var(--forest-deep)}
       <div class="field"><label for="service">Service Requested</label>
         <select id="service" name="service">
           <option>Interior Detail</option><option>Exterior Detail</option><option>Full Detail</option>
-          <option>Mobile Service</option><option>Fleet Vehicles</option><option>Maintenance Detail</option><option>Not sure / Get a Quote</option>
+          <option>Mobile Service</option><option>Not sure / Get a Quote</option>
         </select>
       </div>
       <div class="field"><label for="make">Vehicle Make</label><input id="make" name="vehicle_make" type="text" placeholder="e.g. Honda" /></div>
@@ -1172,8 +1172,6 @@ const SERVICES = [
   {num:"02", title:"Exterior Detailing", desc:"Hand wash, wheel cleaning, tire shine, and exterior protection for a clean, sharp finish.", illus:"bucket"},
   {num:"03", title:"Full Details", desc:"Inside and out in one visit — our most complete clean for vehicles that need the works.", illus:"shine"},
   {num:"04", title:"Mobile Service", desc:"We come to you — at home or at work, anywhere in the Capital Region. No drop-off, no waiting room.", illus:"bus"},
-  {num:"05", title:"Fleet Vehicles", desc:"Keep your work trucks and company cars clean and presentable with detailing built for fleets.", illus:"truck"},
-  {num:"06", title:"Maintenance Details", desc:"Recurring cleanups on a schedule that works for you, so your vehicle always looks its best.", illus:"calendar"},
 ];
 // hand-drawn vintage service-board materials, tilts & illustrations
 const SVC_MATS = ["enamel","metal","wood","leather","cardboard","forest"];
