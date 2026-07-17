@@ -1,0 +1,41 @@
+import { SiteFooter, SiteHeader } from "../components/SiteChrome";
+
+const contactActions = [
+  { className: "contact-call", icon: "☎", eyebrow: "CALL US", label: "(518) 331-2299", href: "tel:+15183312299" },
+  { className: "contact-text", icon: "✉", eyebrow: "TEXT US", label: "START A CONVERSATION", href: "sms:+15183312299?body=Hi%20Dancing%20Bears%20Detail%20Co.%2C%20I%27d%20like%20to%20book%20a%20detail." },
+  { className: "contact-email", icon: "@", eyebrow: "EMAIL US", label: "info@dancingbearsdetailco.com", href: "mailto:info@dancingbearsdetailco.com?subject=Detailing%20Request" },
+  { className: "contact-instagram", icon: "◎", eyebrow: "FOLLOW ON INSTAGRAM", label: "@dancingbearsdetailco", href: "https://www.instagram.com/dancingbearsdetailco", external: true },
+];
+
+export default function BookPage() {
+  return (
+    <main className="page-shell">
+      <SiteHeader />
+      <section className="contact-page inner-page">
+        <div className="contact-page-heading">
+          <div className="section-kicker">★ CONTACT DANCING BEARS ★</div>
+          <h1 className="page-title">LET&apos;S GET YOUR CAR CLEAN.</h1>
+          <p>Call, text, or message us to request your detail. We&apos;re mobile, locally owned, and ready to bring the shine to you.</p>
+        </div>
+
+        <div className="contact-window">
+          <div className="window-title"><span>CONTACT &amp; BOOKING</span><b>×</b></div>
+          <div className="contact-window-body">
+            <div className="contact-now"><i /> NOW TAKING BOOKINGS <i /></div>
+            <div className="contact-action-grid">
+              {contactActions.map(action => (
+                <a className={`contact-action ${action.className}`} href={action.href} target={action.external ? "_blank" : undefined} rel={action.external ? "noreferrer" : undefined} key={action.eyebrow}>
+                  <span className="contact-action-icon" aria-hidden="true">{action.icon}</span>
+                  <span className="contact-action-copy"><small>{action.eyebrow}</small><strong>{action.label}</strong></span>
+                  <b aria-hidden="true">›</b>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </section>
+      <SiteFooter />
+    </main>
+  );
+}

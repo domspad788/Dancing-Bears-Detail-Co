@@ -1,0 +1,37 @@
+import { SiteFooter, SiteHeader } from "./components/SiteChrome";
+
+export default function Home() {
+  return (
+    <main className="page-shell">
+      <SiteHeader />
+      <section className="hero home-hero booking-hero">
+        <video className="booking-hero-video" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
+          <source src="/video/homepage-detailing-loop.mp4" type="video/mp4" />
+        </video>
+        <div className="hero-copy booking-hero-copy">
+          <h1 className="long-headline"><span>IT&apos;S BEEN A LONG, STRANGE TRIP FOR YOUR CAR...</span><em>NOW IT&apos;S TIME TO GET IT DETAILED.</em></h1>
+          <p>Be kind to your car. Book with Dancing Bears Detail Co. today! We bring meticulous, hand-finished detailing straight to your driveway.</p>
+          <div className="hero-actions booking-actions">
+            <a className="y2k-button" href="/services#package-options">BOOK YOUR DETAIL »</a>
+            <span className="price-lock">BASE PACKAGE <b>$125</b></span>
+          </div>
+          <div className="booking-trust" aria-label="Why book with Dancing Bears Detail Co.">
+            <span className="trust-mobile"><i aria-hidden="true">⌂</i><b>WE COME TO YOU</b><small>MOBILE DETAILING</small></span>
+            <span className="trust-quality"><i aria-hidden="true">♥</i><b>QUALITY YOU CAN TRUST</b><small>CAREFUL, HAND-FINISHED WORK</small></span>
+            <span className="trust-satisfaction"><i aria-hidden="true">✓</i><b>SATISFACTION</b><small>QUALITY GUARANTEED</small></span>
+            <span className="trust-local"><i aria-hidden="true">⌖</i><b>LOCALLY OWNED</b><small>&amp; OPERATED</small></span>
+          </div>
+        </div>
+        <img className="floating-mascot home-polisher" src="/mascots/polisher-bear-cutout.png" alt="" width="1330" height="1182" aria-hidden="true" />
+        <img className="floating-mascot home-vacuum" src="/mascots/vacuum-bear-cutout.png" alt="" width="1402" height="1122" aria-hidden="true" />
+      </section>
+      <div className="marquee">
+        <div className="marquee-track">
+          <span>✦ WE COME TO YOU&nbsp;&nbsp;&nbsp; ★ QUALITY YOU CAN TRUST&nbsp;&nbsp;&nbsp; ✦ SATISFACTION GUARANTEED&nbsp;&nbsp;&nbsp; ★ LOCALLY OWNED &amp; OPERATED&nbsp;&nbsp;&nbsp;</span>
+          <span aria-hidden="true">✦ WE COME TO YOU&nbsp;&nbsp;&nbsp; ★ QUALITY YOU CAN TRUST&nbsp;&nbsp;&nbsp; ✦ SATISFACTION GUARANTEED&nbsp;&nbsp;&nbsp; ★ LOCALLY OWNED &amp; OPERATED&nbsp;&nbsp;&nbsp;</span>
+        </div>
+      </div>
+      <SiteFooter />
+    </main>
+  );
+}

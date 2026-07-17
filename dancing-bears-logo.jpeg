@@ -1,0 +1,177 @@
+export const runtime = "nodejs";
+
+type BookingPayload = Record<string, unknown>;
+
+const bookingRateLimits = new Map<string, { count: number; lastRequest: number; resetAt: number }>();
+
+function jsonResponse(body: Record<string, unknown>, status = 200): Response {
+  return Response.json(body, {
+    status,
+    headers: {
+      "Cache-Control": "no-store",
+    },
+  });
+}
+
+function cleanText(value: unknown, maxLength: number): string {
+  return typeof value === "string" ? value.trim().replace(/\s+/g, " ").slice(0, maxLength) : "";
+}
+
+function formatPreferredTime(date: string, time: string): string {
+  const [year, month, day] = date.split("-");
+  const [hourValue, minute = "00"] = time.split(":");
+  const hour = Number(hourValue);
+  const suffix = hour >= 12 ? "PM" : "AM";
+  const displayHour = hour % 12 || 12;
+  return `${month}/${day}/${year} at ${displayHour}:${minute} ${suffix}`;
+}
+
+function getRequestIp(request: Request): string {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip")?.trim() ||
+    "unknown"
+  );
+}
+
+function isRateLimited(request: Request): boolean {
+  const key = getRequestIp(request);
+  const now = Date.now();
+  const existing = bookingRateLimits.get(key);
+
+  if (!existing || now >= existing.resetAt) {
+    bookingRateLimits.set(key, { count: 1, lastRequest: now, resetAt: now + 60 * 60 * 1000 });
+    return false;
+  }
+
+  if (now - existing.lastRequest < 10_000 || existing.count >= 5) return true;
+  existing.count += 1;
+  existing.lastRequest = now;
+  return false;
+}
+
+export async function POST(request: Request): Promise<Response> {
+  const requestUrl = new URL(request.url);
+  const origin = request.headers.get("origin");
+  if (origin && origin !== requestUrl.origin) {
+    return jsonResponse({ error: "This booking request was blocked." }, 403);
+  }
+
+  const rawBody = await request.text();
+  if (rawBody.length > 12_000) {
+    return jsonResponse({ error: "This booking request is too large." }, 413);
+  }
+
+  let payload: BookingPayload;
+  try {
+    payload = JSON.parse(rawBody) as BookingPayload;
+  } catch {
+    return jsonResponse({ error: "Please check the booking details and try again." }, 400);
+  }
+
+  // Hidden honeypot field: bots see success without triggering a text message.
+  if (cleanText(payload.website, 100)) return jsonResponse({ ok: true });
+
+  const name = cleanText(payload.name, 80);
+  const customerPhone = cleanText(payload.phone, 30);
+  const email = cleanText(payload.email, 120);
+  const date = cleanText(payload.date, 10);
+  const time = cleanText(payload.time, 5);
+  const car = cleanText(payload.car, 100);
+  const vehicleType = cleanText(payload.vehicleType, 80);
+  const notes = cleanText(payload.notes, 800);
+  const addOns = Array.isArray(payload.addOns)
+    ? payload.addOns.map((item) => cleanText(item, 80)).filter(Boolean).slice(0, 10)
+    : [];
+  const thirdRow = payload.thirdRow === true;
+  const startingTotal =
+    typeof payload.startingTotal === "number" && Number.isFinite(payload.startingTotal)
+      ? Math.max(0, Math.round(payload.startingTotal))
+      : 0;
+  const variablePrice = payload.variablePrice === true;
+
+  if (
+    name.length < 2 ||
+    customerPhone.length < 7 ||
+    car.length < 2 ||
+    vehicleType.length < 2 ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+    !/^\d{2}:\d{2}$/.test(time)
+  ) {
+    return jsonResponse(
+      { error: "Please enter your name, phone number, car, preferred date, and preferred time." },
+      400,
+    );
+  }
+
+  if (email && !/^\S+@\S+\.\S+$/.test(email)) {
+    return jsonResponse({ error: "Please enter a valid email address or leave it blank." }, 400);
+  }
+
+  if (isRateLimited(request)) {
+    return jsonResponse(
+      { error: "Please wait a moment before sending another request, or text (518) 331-2299." },
+      429,
+    );
+  }
+
+  const accountSid = process.env.TWILIO_ACCOUNT_SID?.trim();
+  const authToken = process.env.TWILIO_AUTH_TOKEN?.trim();
+  const fromNumber = process.env.TWILIO_FROM_NUMBER?.trim();
+  const messagingServiceSid = process.env.TWILIO_MESSAGING_SERVICE_SID?.trim();
+  const destination = process.env.BOOKING_SMS_TO?.trim() || "+15183312299";
+
+  if (!accountSid || !authToken || (!fromNumber && !messagingServiceSid)) {
+    return jsonResponse(
+      {
+        error:
+          "Online text notifications are still being connected. Please call or text (518) 331-2299 to request this detail.",
+      },
+      503,
+    );
+  }
+
+  const message = [
+    "NEW DANCING BEARS DETAIL REQUEST",
+    `Name: ${name}`,
+    `Customer phone: ${customerPhone}`,
+    `Preferred: ${formatPreferredTime(date, time)}`,
+    `Car: ${car} (${vehicleType})`,
+    `Third-row seating: ${thirdRow ? "Yes" : "No"}`,
+    `Add-ons: ${addOns.length ? addOns.join(", ") : "None"}`,
+    `Starting total: $${startingTotal}${variablePrice ? "+" : ""}`,
+    `Special notes: ${notes || "None"}`,
+    ...(email ? [`Email: ${email}`] : []),
+  ].join("\n");
+
+  const form = new URLSearchParams({ To: destination, Body: message });
+  if (messagingServiceSid) form.set("MessagingServiceSid", messagingServiceSid);
+  else if (fromNumber) form.set("From", fromNumber);
+
+  const twilioResponse = await fetch(
+    `https://api.twilio.com/2010-04-01/Accounts/${encodeURIComponent(accountSid)}/Messages.json`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${Buffer.from(`${accountSid}:${authToken}`).toString("base64")}`,
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: form,
+      cache: "no-store",
+    },
+  );
+
+  if (!twilioResponse.ok) {
+    console.error(
+      "Twilio booking notification failed",
+      twilioResponse.status,
+      (await twilioResponse.text()).slice(0, 500),
+    );
+    return jsonResponse(
+      { error: "We couldn’t text your request right now. Please call or text (518) 331-2299." },
+      502,
+    );
+  }
+
+  return jsonResponse({ ok: true });
+}

@@ -1,0 +1,172 @@
+"use client";
+
+import { useState, type FormEvent } from "react";
+import { SiteFooter, SiteHeader } from "../components/SiteChrome";
+import { addOns, basePackageIncludes, services } from "../site-data";
+
+export default function ServicesPage() {
+  const [builderOpen, setBuilderOpen] = useState(false);
+  const [vehicleName, setVehicleName] = useState(services[0].name);
+  const [thirdRow, setThirdRow] = useState(false);
+  const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [booked, setBooked] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [bookingError, setBookingError] = useState("");
+  const vehicle = services.find(service => service.name === vehicleName) ?? services[0];
+  const startingTotal = vehicle.basePrice + (thirdRow ? 20 : 0) + addOns.filter(addOn => selectedAddOns.includes(addOn.name)).reduce((sum, addOn) => sum + addOn.startingPrice, 0);
+  const hasVariablePrice = vehicle.name === "Large SUV / Truck" || selectedAddOns.includes("Steam cleaning");
+
+  const openBuilder = () => {
+    setBuilderOpen(true);
+    requestAnimationFrame(() => document.getElementById("package-builder")?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
+
+  const toggleAddOn = (name: string) => {
+    setSelectedAddOns(current => current.includes(name) ? current.filter(item => item !== name) : [...current, name]);
+  };
+
+  const openBooking = () => {
+    setBookingOpen(true);
+    requestAnimationFrame(() => document.getElementById("booking-form")?.scrollIntoView({ behavior: "smooth", block: "start" }));
+  };
+
+  const submitBooking = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (submitting) return;
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    setSubmitting(true);
+    setBookingError("");
+
+    try {
+      const response = await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.get("name"),
+          phone: formData.get("phone"),
+          email: formData.get("email"),
+          date: formData.get("date"),
+          time: formData.get("time"),
+          car: formData.get("car"),
+          notes: formData.get("notes"),
+          website: formData.get("website"),
+          vehicleType: vehicle.name,
+          thirdRow,
+          addOns: selectedAddOns,
+          startingTotal,
+          variablePrice: hasVariablePrice,
+        }),
+      });
+      const result = await response.json().catch(() => ({})) as { error?: string };
+      if (!response.ok) throw new Error(result.error || "We couldn’t send your request. Please call or text (518) 331-2299.");
+      setBooked(true);
+      form.reset();
+    } catch (error) {
+      setBookingError(error instanceof Error ? error.message : "We couldn’t send your request. Please call or text (518) 331-2299.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <main className="page-shell">
+      <SiteHeader />
+      <section className="services inner-page">
+        <div className="section-kicker">★ CHOOSE YOUR DETAIL ★</div>
+        <h1 className="page-title">DETAIL PACKAGES</h1>
+        <p className="page-intro">Choose an available package to build your detail. Base Interior Detail options start at $125.</p>
+
+        <div className="package-choice-grid" id="package-options">
+          <button className={`package-choice available${builderOpen ? " selected" : ""}`} type="button" onClick={openBuilder}>
+            <span className="package-status">AVAILABLE NOW</span>
+            <span className="package-choice-icon">✦</span>
+            <h2>BASE INTERIOR DETAIL</h2>
+            <p>A complete interior reset, customized by your vehicle size and selected add-ons.</p>
+            <span className="package-card-includes">
+              <b>EVERY BASE PACKAGE INCLUDES</b>
+              <span>{basePackageIncludes.map(item => <i key={item}>{item}</i>)}</span>
+            </span>
+            <strong>OPTIONS FROM $125</strong>
+            <span className="package-select-button">SELECT &amp; BUILD »</span>
+          </button>
+          <article className="package-choice coming-soon" aria-label="Exterior Detail coming soon">
+            <span className="package-status">COMING SOON</span>
+            <span className="package-choice-icon">◉</span>
+            <h2>EXTERIOR DETAIL</h2>
+            <p>A dedicated exterior package is currently being polished for launch.</p>
+            <strong>COMING SOON</strong>
+          </article>
+          <article className="package-choice coming-soon" aria-label="Full Detail coming soon">
+            <span className="package-status">COMING SOON</span>
+            <span className="package-choice-icon">⚡</span>
+            <h2>FULL DETAIL</h2>
+            <p>The full inside-and-out experience is being perfected for its future launch.</p>
+            <strong>COMING SOON</strong>
+          </article>
+        </div>
+
+        <img className="floating-mascot services-vacuum" src="/mascots/vacuum-bear-cutout.png" alt="" width="1402" height="1122" aria-hidden="true" />
+        <img className="floating-mascot services-polisher" src="/mascots/polisher-bear-cutout.png" alt="" width="1330" height="1182" aria-hidden="true" />
+
+        {builderOpen && <section className="package-builder" id="package-builder">
+          <div className="window-title"><span>BUILD YOUR PACKAGE</span><b>×</b></div>
+          <div className="package-builder-body">
+            <div className="builder-heading"><span>BASE INTERIOR DETAIL</span><h2>BUILD YOUR PACKAGE</h2><p>Select your vehicle and any add-ons to calculate your starting price.</p></div>
+            <div className="builder-layout">
+              <div className="builder-options">
+                <fieldset>
+                  <legend>1. SELECT YOUR VEHICLE</legend>
+                  <div className="vehicle-options">{services.map(service => <button type="button" aria-pressed={vehicleName === service.name} className={vehicleName === service.name ? "selected" : ""} onClick={() => setVehicleName(service.name)} key={service.name}><span>{service.icon}</span><b>{service.name}</b><strong>{service.price}</strong></button>)}</div>
+                  <label className="third-row-toggle"><input type="checkbox" checked={thirdRow} onChange={event => setThirdRow(event.target.checked)} /><span><b>ADD THIRD-ROW SEATING</b><small>Extra cleaning area</small></span><strong>+$20</strong></label>
+                </fieldset>
+                <fieldset>
+                  <legend>2. CHOOSE ADD-ONS</legend>
+                  <div className="builder-addons">{addOns.map(addOn => <label key={addOn.name}><input type="checkbox" checked={selectedAddOns.includes(addOn.name)} onChange={() => toggleAddOn(addOn.name)} /><span><b>{addOn.name}</b>{addOn.note && <small>{addOn.note}</small>}</span><strong>{addOn.price}</strong></label>)}</div>
+                </fieldset>
+              </div>
+              <aside className="builder-summary">
+                <div className="summary-label">YOUR BUILD</div>
+                <ul className="summary-breakdown">
+                  <li><span>{vehicle.name}</span><strong>{vehicle.price}</strong></li>
+                  {thirdRow && <li><span>Third-row seating</span><strong>+$20</strong></li>}
+                  {selectedAddOns.map(name => { const addOn = addOns.find(item => item.name === name); return addOn ? <li key={name}><span>{addOn.name}</span><strong>+{addOn.price}</strong></li> : null; })}
+                  {!thirdRow && selectedAddOns.length === 0 && <li className="empty"><span>No add-ons selected</span><strong>—</strong></li>}
+                </ul>
+                <div className="summary-total"><span>STARTING TOTAL</span><strong>${startingTotal}{hasVariablePrice ? "+" : ""}</strong></div>
+                <button className="package-button" type="button" onClick={openBooking}>BOOK THIS BUILD »</button>
+                <small>Final price is confirmed before service. Prices are subject to change.</small>
+              </aside>
+            </div>
+          </div>
+        </section>}
+
+        {bookingOpen && <section className="inline-booking" id="booking-form">
+          <div className="window-title"><span>BOOK YOUR DETAIL</span><b>×</b></div>
+          <div className="inline-booking-body">
+            {booked ? <div className="success"><b>✓ REQUEST SENT!</b><span>Your detail request was texted to Dancing Bears. We’ll be in touch soon to confirm it.</span></div> : <>
+              <div className="inline-booking-copy"><span>YOUR SELECTED BUILD</span><h2>{vehicle.name}</h2><p>{selectedAddOns.length ? selectedAddOns.join(" · ") : "Base interior detail"}{thirdRow ? " · Third-row seating" : ""}</p><strong>Starting total: ${startingTotal}{hasVariablePrice ? "+" : ""}</strong></div>
+              <form onSubmit={submitBooking}>
+                <label>YOUR NAME<input required name="name" autoComplete="name" placeholder="Your name" /></label>
+                <label>PHONE NUMBER<input required name="phone" type="tel" autoComplete="tel" placeholder="(518) 555-0123" /></label>
+                <label>EMAIL ADDRESS <small>(OPTIONAL)</small><input name="email" type="email" autoComplete="email" placeholder="you@example.com" /></label>
+                <label>VEHICLE MAKE / MODEL<input required name="car" placeholder="e.g. 2022 Honda Civic" /></label>
+                <label>PREFERRED DATE<input required name="date" type="date" /></label>
+                <label>PREFERRED TIME<input required name="time" type="time" /></label>
+                <label className="full-field">SPECIAL NOTES<textarea name="notes" rows={4} maxLength={800} placeholder="Vehicle condition, address area, or anything else we should know..." /></label>
+                <label className="booking-honeypot" aria-hidden="true">WEBSITE<input name="website" tabIndex={-1} autoComplete="off" /></label>
+                {bookingError && <p className="booking-error" role="alert">{bookingError}</p>}
+                <button className="y2k-button" type="submit" disabled={submitting}>{submitting ? "SENDING REQUEST..." : "REQUEST THIS DETAIL »"}</button>
+              </form>
+            </>}
+          </div>
+        </section>}
+
+        <p className="pricing-disclaimer">* Prices are subject to change.</p>
+      </section>
+      <SiteFooter />
+    </main>
+  );
+}

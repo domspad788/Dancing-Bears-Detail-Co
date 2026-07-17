@@ -1,0 +1,25 @@
+export const services = [
+  { icon: "🚗", name: "Sedan / Coupe", price: "$125", basePrice: 125, text: "The complete base interior detail for compact and standard passenger cars." },
+  { icon: "★", name: "Small SUV", price: "$140", basePrice: 140, text: "The complete base interior detail sized for small SUVs and crossovers." },
+  { icon: "⚡", name: "Large SUV / Truck", price: "$160+", basePrice: 160, text: "The complete base interior detail for large SUVs and trucks." },
+];
+
+export const basePackageIncludes = [
+  "Interior detail",
+  "Full vacuum",
+  "Wipe-down of all surfaces",
+  "Door jamb cleaning",
+  "Cup holder cleaning",
+  "Interior window cleaning",
+  "Floor mat cleaning",
+  "Light stain treatment",
+  "Trash removal",
+  "Air freshener",
+];
+
+export const addOns = [
+  { name: "Steam cleaning", price: "$25–$50", startingPrice: 25, note: "Sanitizes vents, cracks, and crevices" },
+  { name: "Trunk detail", price: "$20", startingPrice: 20 },
+  { name: "Tire detail", price: "$25", startingPrice: 25 },
+  { name: "Exterior wash & shine treatment", price: "$75", startingPrice: 75 },
+];
